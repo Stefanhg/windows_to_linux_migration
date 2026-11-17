@@ -1,0 +1,6 @@
+{
+  "uuid": "mirrored-panels@fix-mint",
+  "name": "Mirrored taskbars",
+  "description": "Show the same windows and pinned apps in each Cinnamon grouped task list.",
+  "cinnamon-version": ["6.2", "6.4", "6.6"]
+}
