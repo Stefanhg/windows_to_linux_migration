@@ -37,6 +37,7 @@ Mission Center is set up by the Task Manager script. Flameshot is a prerequisite
 - Add a taskbar on the second monitor with a mirrored task list, pinned launchers, and supported applets such as the clock.
 - Increase taskbar height from 40 to 60 logical pixels and scale up panel icons.
 - Maximize a window when you drag it to the top edge of the screen.
+- Change default font to inter regular, this was due to me finding default font hard to read.
 
 ### Keyboard shortcuts
 

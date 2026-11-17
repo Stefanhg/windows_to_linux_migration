@@ -9,4 +9,6 @@ if [ -f /.flatpak-info ]; then
     fi
     exec flatpak-spawn --host sh "$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/tweaks.sh" "$@"
 fi
-exec python3 "$(dirname "$0")/tweaks.py" "$@"
+script_dir=$(dirname -- "$0")
+python3 "$script_dir/tweaks.py" "$@"
+exec sh "$script_dir/scripts/fonts.sh"
