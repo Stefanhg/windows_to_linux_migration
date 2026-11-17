@@ -1,108 +1,74 @@
+# Windows-to-Linux migration project
 
-## Windows-to-Linux migration Project
+This project aims to make Linux Mint 22 Cinnamon feel familiar to Windows users, with a productive desktop and as little configuration as possible.
 
-Target OS: Linux Mint 22 Cinnamon
-Goal: Deliver a familiar, productive Windows-like desktop experience with minimal configuration.
+## Scripts
 
-Project Philosophy
+Run the scripts from the repository root as your regular user in a Cinnamon desktop session. Install Flameshot before applying the tweaks. The Task Manager setup requires Flatpak with Flathub configured.
 
-We are working on a project to provide the best possible experience when migrating from Windows to Linux.
-Our chosen operating system is Linux Mint 22 Cinnamon.
-Why Mint? Because its out-of-the-box experience feels familiar. See `Why Mint?` for the full explanation.
+| Script | What it does |
+| --- | --- |
+| [install_all.sh](install_all.sh) | Runs the desktop tweaks and the Task Manager setup. |
+| [tweaks.sh](tweaks.sh) | Applies the Cinnamon panel, window, and screenshot tweaks. |
+| [alternatives.sh](alternatives.sh) | Installs Mission Center if needed and adds a Task Manager launcher and keyboard shortcut. |
 
-## Scripts overview
+## Windows apps and Linux alternatives
 
-| Name              | Function                                                               |
-|-------------------|------------------------------------------------------------------------|
-| install_all.sh    | Deploys all recommendations from this guide                            |
-| tweaks.sh         | Applies all tweaks suggested here                                      |
-| alternatives.sh   | Deploys the alternative application e.g. Task Manager alternative      |
+Mission Center is set up by the Task Manager script. Flameshot is a prerequisite for the screenshot shortcut, and Remmina can be installed separately.
 
-## Classic Applications & Linux Alternatives
+| Windows app | Linux alternative | Install manually |
+| --- | --- | --- |
+| Task Manager | Mission Center | `flatpak install flathub io.missioncenter.MissionCenter` |
+| Remote Desktop | Remmina | `flatpak install flathub org.remmina.Remmina` |
+| Snipping Tool | Flameshot | `sudo apt install flameshot` |
 
-Alternatives that directly gets mapped to equvilient when deployed
-They are preinstalled by default
+### Optional apps
 
-| Windows App     | Linux Alternative | Install                                                                  |
-|-----------------|-------------------|--------------------------------------------------------------------------|
-| Task Manager    | Mission Monitor   | `flatpak install flathub io.missioncenter.MissionCenter`                 |
-| Remote Desktop  | Remmina           | `flatpak install flathub org.remmina.Remmina`                            |
-| Snipping Tool   | Flameshot         | `sudo apt install flameshot`                                             |
+| Windows app | Linux alternative | Install | Notes |
+| --- | --- | --- | --- |
+| PuTTY | PuTTY | `sudo apt install putty` | I recall having some reliability issues with it. |
+| Notepad++ | Notepad Next | `flatpak install flathub com.github.dail8859.NotepadNext` | |
+| Microsoft Office | ONLYOFFICE | `flatpak install flathub org.onlyoffice.desktopeditors` | |
+| VS Code | VS Code | `flatpak install flathub com.visualstudio.code` | |
+| Media player | VLC | `flatpak install flathub org.videolan.VLC` | |
 
-Alternatives that can be installed
+## Desktop tweaks
 
-| Windows App      | Linux Alternative | Install | Notes |
-|------------------|---------------|-----------------------------------------------------------|--------------------------------------------------------|
-| PuTTY            | Putty         | `sudo apt install putty`                                  | Note I remember this might not be completely reliable! |
-| Notepad++        | Notepad Next  | `flatpak install flathub com.github.dail8859.NotepadNext` | |
-| Microsoft Office | OnlyOffice    | `flatpak install flathub org.onlyoffice.desktopeditors` |   |
-| VS Code          | VS Code       | `flatpak install flathub com.visualstudio.code` | |
-| Media player     | VLC           | `flatpak install flathub org.videolan.VLC` | |
+- Add a taskbar on the second monitor with a mirrored task list, pinned launchers, and supported applets such as the clock.
+- Increase taskbar height from 40 to 60 logical pixels and scale up panel icons.
+- Maximize a window when you drag it to the top edge of the screen.
 
+### Keyboard shortcuts
 
-## Tweaks
+| Shortcut | Action |
+| --- | --- |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | Open Flameshot for a region capture. The default <kbd>Print Screen</kbd> shortcut is also available. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Open Mission Center (Task Manager). |
 
-We attempt to avoid tweaking behavior as much as possible to let user feel comfortable in their own way, but tweak where it is needed.
+### To do
 
-- Make taskbar appear on second screen, including it's icons and time.
-- Increase taskbar and icon size 150%, as it felt too small
-- Make moving window to top of screen full size instead of half size
-- Duplicate the taskbar on each screen(instead of just containing apps)'
+- Explore adding “Open in…” actions for editors such as VS Code and Notepad++. See the [Dolphin service menus in Michael Matta's migration project](https://github.com/Michael-Matta1/win2linux-migration).
 
-# Shortuts
-- Mapped Windows(super) + Shift + S to flameshot as alternative, keeping default too (default Printscreen)
-- Mapped CTRL + Shift + ESC to opening Task Manager(Mission Monitor)
+## Why Mint?
 
-Todo:;
-- Open IN XXXX e.g. Vs Code, notepad+ or other. Look into Dolphin Service Menus https://github.com/Michael-Matta1/win2linux-migration
+I use Ubuntu at work and have tried Kali, Debian, Ubuntu releases from 22 to 26, and Zorin, which I used on my school laptop for a year. Mint 22 Cinnamon felt the most like home straight away.
 
-
-## Development
-Read `development.md` (note make clickable)
-
-## Why mint?
-
-I have through many years tested many OS'es and Linux Mint out of the box had an amazing experince.
-I daily drive Ubuntu at work, tried:
-- Kali,
-- Debian,
-- Ubuntu 22-26,
-- Zorin(was daily driver for a year on school laptop)
-
-While all was decent to use, nothing have felt like home like Mint 22.
-
-I am very focused on out-of-box experince with no tweaks needed as an OS for me is my productivity tool, i don't want to tweak it to to make it work.
-And I like familiarity so this got me close to Windows experince.
+For me, an operating system is a productivity tool. I want a familiar desktop that feels comfortable out of the box and needs only a few adjustments.
 
 ## Gaming
 
-I found `Lutris` to be amazing for deploying **Windows** games. You create a YAML for others to use, and then it can be used to automatically deployment.
+I've found Lutris useful for installing Windows games. You can share a YAML installer script so others can automate the same setup.
 
+## Dual boot for games that need Windows
 
-## Last resort dual boot.
+Some games still need Windows. I experimented with a dual-boot setup on Ubuntu that let me hibernate Linux, reboot into Windows, and resume Linux later. I added a menu entry on Linux and used a desktop batch file on Windows as part of the return workflow. See the [dual-boot hibernation project](https://github.com/TheSalaty/dual-boot-hibernation) for the approach.
 
-While we do seek game compatability to be 100% functional, of course not all are.
-In this case we can apply hybrid sleep to Linux / Windows.
-This allows for hybrid sleeping, reboot machine and then go back into Windows.
-I fiddled with it on Ubuntu and got a pretty decent result with it.
-I added a menu entry to enter Windows from Linux and on Windows a .bat file on desktop
-Sadly Windows does not allow directly booting into Linux, so i had to do some tweaking there
-to make it work.
-Read more about the approach: https://github.com/TheSalaty/dual-boot-hibernation
+## More migration resources
 
+- [Linux Base Camp app directory](https://linuxbasecamp.com/apps) and [AlternativeTo](https://alternativeto.net/) list software alternatives.
+- [Samillion's Windows-to-Linux notes](https://github.com/Samillion/Windows-to-Linux) document migration requirements and challenges.
+- [Michael Matta's Windows-to-Linux migration project](https://github.com/Michael-Matta1/win2linux-migration) takes an approach similar to this one.
 
-## Windows To Linux Alternatives lists
+## Development
 
-Various websites that contains alternative lists
-
-https://linuxbasecamp.com/apps
-https://alternativeto.net/
-
-## Other migration information
-
-While researching i also found other's migration notes
-
-| Link | Notes |
-| https://github.com/Samillion/Windows-to-Linux | Interesting process documenting his struggles and requirements |
-| https://github.com/Michael-Matta1/win2linux-migration | Closely resembles what I have been working on here!  |
-
+See the [development notes](development.md) for the testing strategy and [desktop acceptance tests](tests/README.md) for setup and commands.

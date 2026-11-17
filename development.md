@@ -1,11 +1,15 @@
-## Development
+# Development
 
-# Testing strategy
-We use behavior based testing, meaning it tests actual behavior in OS to verify it works to cover user's experince rather than simulated tests.
+## Testing strategy
 
-See [desktop testing instructions](tests/README.md). Verify the second-screen
-clock with `sh tests/desktop.sh --tags clock`. The script backfills supported
-applets on existing second panels and copies their initial settings, including
-clock format. Applets limited to one instance (sound, network, power) stay on
-the primary panel; supported items such as clock/calendar and keyboard can
-appear on both. Reapplying does not create duplicate copies on a panel.
+We use behavior-based tests to verify what users experience in a live Cinnamon session. The [desktop testing instructions](tests/README.md) cover prerequisites, commands, and what the tests observe.
+
+## Second-screen applets
+
+The [tweak script](tweaks.sh) fills in missing supported applets on existing second panels and copies their initial settings, including the clock format. Cinnamon limits some applets, such as sound, network, and power, to one instance on the primary panel. Supported applets such as clock/calendar and keyboard can appear on both panels. You can reapply the tweaks without creating duplicate applets.
+
+To verify the clock on both panels, run this from the repository root:
+
+```sh
+sh tests/desktop.sh --tags clock
+```

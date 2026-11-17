@@ -1,10 +1,13 @@
 # Desktop acceptance tests
 
 The primary acceptance suite uses [Behave](https://behave.readthedocs.io/en/stable/)
-and executable Gherkin scenarios in [desktop.feature](features/desktop.feature).
+and executable Gherkin scenarios for the [desktop](features/desktop.feature),
+[clock](features/clock.feature), and [Task Manager](features/task_manager.feature).
 The Python files are desktop automation drivers, not copies of the tweak
 implementation. They never import `tweaks.py`, fabricate GSettings schemas,
 or replace Cinnamon applets with mocks.
+
+## Setup
 
 Run on Linux Mint 22 Cinnamon **X11**, with two connected monitors and tweaks
 already applied. Use a disposable desktop or VM with two virtual displays for
@@ -22,6 +25,8 @@ Mint also needs its system packages `python3-gi`, `gir1.2-gtk-3.0`, and
 `python3-pip`. The runner uses the system Python so it can load Mint's GTK
 bindings. Pure Python test dependencies are isolated in the ignored `.deps`
 directory. When launched inside a Flatpak IDE, the runner delegates to the host.
+
+## Running the tests
 
 From the project root:
 
@@ -41,7 +46,7 @@ terminates only the test-owned application process, including on assertion
 failure. Do not run while taking a screenshot yourself. Abrupt process kills
 or a Cinnamon crash can prevent cleanup.
 
-The suite asserts:
+## What the suite checks
 
 - Both actual panel actors are visible and 60 logical pixels high.
 - A mapped, visible clock label on each panel renders its current time text.
@@ -68,8 +73,10 @@ the run rather than silently skipping acceptance coverage. These tests cover
 the grouped-window-list applet and the active workspace; notification-area
 duplication and pixel-perfect styling are outside their scope.
 
+## Reports and additional checks
+
 JUnit XML and task-list state on failure go to `tests/reports/`. The older
-`test_tweaks.py` and `test_mirroring.js` remain useful fast integration/unit
+[test_tweaks.py](test_tweaks.py) and [test_mirroring.js](test_mirroring.js) remain useful fast integration/unit
 checks, but passing them alone is not desktop acceptance:
 
 ```sh
